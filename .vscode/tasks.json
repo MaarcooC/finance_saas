@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Avvia server PHP",
+        "type": "shell",
+        "command": "php -S localhost:5500",
+        "problemMatcher": [],
+        "isBackground": true,
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "presentation": {
+          "reveal": "silent"
+        }
+      }
+    ]
+  }
