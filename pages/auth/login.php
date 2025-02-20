@@ -1,5 +1,5 @@
 <?php
-require_once('C:/Programming/finance_saas/config/config.php');
+require_once('../../config/config.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // sql injection
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['username'] = $row['username'];
 
-                header("Location: dashboard.php");
+                header("Location: ../dashboard/index.php");
                 exit;
             } else {
                 // if the password is incorrect
