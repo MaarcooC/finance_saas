@@ -1,0 +1,82 @@
+body {
+    background-color: rgb(13, 13, 39);
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    padding-top: 50px; 
+    width: 100%;
+    color: rgb(235, 233, 248);
+}
+
+.cont {
+    background-color: rgb(21, 21, 61);
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    height: 60%;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+.login-text {
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column; 
+    gap: 25px;
+    width: 100%;
+}
+
+label {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%; 
+    padding: 10px;
+    font-size: 16px;
+    background-color: rgb(235, 233, 248);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+button {
+    padding: 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
