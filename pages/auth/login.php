@@ -1,37 +1,44 @@
 <?php
 require_once('C:/Programming/finance_saas/config/config.php');
 
-$user = $_POST["user"];
-$user = mysqli_real_escape_string($conn, $user);
-$user = strip_tags($user);
-$password = $_POST["pwd"];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // sql injection
+    $user = mysqli_real_escape_string($conn, strip_tags($_POST['user']));
+    $password = $_POST['pwd'];
 
-$sql = "SELECT password FROM users WHERE username = '$user'";
+    // Query
+    $sql = "SELECT idUser, username, password FROM users WHERE username = '$user'";
 
-// Esegui la query
-$result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql);
 
-if ($result) {
-    if ($row = mysqli_fetch_assoc($result)) {
-        // Verifica della password hashata
-        if (password_verify($password, $row['password'])) {
-            echo "Accesso riuscito!";
+    // check if the user exists
+    if ($result) {
+        if ($row = mysqli_fetch_assoc($result)) {
+            // check if the password is correct
+            if (password_verify($password, $row['password'])) {
+                $_SESSION['user_id'] = $row['id'];
+                $_SESSION['username'] = $row['username'];
+
+                header("Location: dashboard.php");
+                exit;
+            } else {
+                // if the password is incorrect
+                $_SESSION['error_message'] = "User not found.";
+                header("Refresh: 0; url=index.php");
+                exit;
+            }
         } else {
-            echo "Password errata!";
-            echo '
-                <button>
-                <a href="login.html">Vai al login</a>
-                </button>';
+            // user not found
+            $_SESSION['error_message'] = "User not found.";
+            header("Refresh: 0; url=index.php");
+            exit;
         }
     } else {
-        echo "Utente non trovato!";
-        echo '
-            <button>
-            <a href="login.html">Vai al login</a>
-            </button>';
+        // query error
+        echo "query error.";
     }
-} else {
-    echo "Errore nell'esecuzione della query.";
-}
 
-mysqli_close($conn);
+    // close the session
+    mysqli_close($conn);
+}
+?>
