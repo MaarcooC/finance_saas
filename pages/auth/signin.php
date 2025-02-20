@@ -26,7 +26,8 @@ $stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?,
 $stmt->bind_param("sss", $username, $hash, $email);
 
 if ($stmt->execute()) {
-    echo "ok";
+    header("Location: index.php");
+    exit;
 } else {
     $_SESSION['error_message'] = "Registration failed. Please try again.";
     header("Location: register.php");
