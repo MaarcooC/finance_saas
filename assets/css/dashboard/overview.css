@@ -1,0 +1,28 @@
+.boxes {
+    width: 90%;
+    margin: 20px;
+}
+
+.box {
+    width: 25%;
+    background-color: rgb(21, 21, 61);
+    border-radius: 10px;
+}
+
+.cont-title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 10%;
+}
+
+.c-title {
+    font-size: 35px;
+    color: rgb(235, 233, 248);
+    margin-right: 10px;
+}
+
+.cont-title img {
+    padding-top: 5px;
+    height: 32px;
+}
