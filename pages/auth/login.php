@@ -1,5 +1,5 @@
 <?php
-require_once('../../config/config.php');
+require_once('C:\xampp\htdocs\finance_saas\config\config.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // sql injection
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($row = mysqli_fetch_assoc($result)) {
             // check if the password is correct
             if (password_verify($password, $row['password'])) {
-                $_SESSION['user_id'] = $row['id'];
+                $_SESSION['user_id'] = $row['idUser'];
                 $_SESSION['username'] = $row['username'];
 
                 header("Location: ../dashboard/index.php");

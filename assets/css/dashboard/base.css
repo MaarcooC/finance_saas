@@ -1,0 +1,124 @@
+body {
+    background-color: rgb(13, 13, 39);
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.header {
+    background-color: rgb(21, 21, 61);
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    padding-left: 10%;
+}
+
+.finance-manager {
+    color: rgb(235, 233, 248);
+    font-size: 3rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.finance-manager img {
+    margin-right: 10px;
+    width: 3rem;
+    height: 3rem;
+}
+
+.welcome {
+    color: rgb(235, 233, 248);
+    font-size: 2rem;
+}
+
+.center {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.center button {
+    background-color: rgb(28, 28, 79);
+    color: rgb(235, 233, 248);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.center button:hover {
+    background-color: rgb(50, 50, 115);
+    transform: scale(1.05);
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+
+.logout {
+    position: relative;
+}
+
+.logout img {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+.logout:hover::after {
+    content: "Logout";
+    position: absolute;
+    top: -25px;
+    right: 0;
+    background-color: rgb(21, 21, 61);
+    padding: 5px;
+    color: rgb(235, 233, 248);
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.center a, a:hover {
+    text-decoration: none;
+    color: black;
+    color: inherit;
+}
+
+@media (max-width: 1042px) {
+    .finance-manager {
+        font-size: 1.2rem;
+    }
+    .welcome {
+        font-size: 0.9rem;
+    }
+    .center button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    .logout img {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    .logout:hover::after {
+        font-size: 0.9rem;
+        top: -20px;
+    }
+}

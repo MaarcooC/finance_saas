@@ -7,6 +7,7 @@ require_once("C:/xampp\htdocs/finance_saas\includes\check_auth.php");
     <head>
         <title>Dashboard</title>
         <link rel="stylesheet" href="../../assets/css/dashboard/base.css">
+        <link rel="stylesheet" href="../../assets/css/dashboard/overview.css">
         <meta charset="UTF-8">
     </head>
     <body>
@@ -21,7 +22,7 @@ require_once("C:/xampp\htdocs/finance_saas\includes\check_auth.php");
                 </div>
             </div>
             <div class="center">
-                <button><a href="index.php">Overview</a></button>
+            <button><a href="index.php">Overview</a></button>
                 <button><a href="transactions.php">Transactions</a></button>
                 <button>Settings</button>
             </div>
@@ -32,10 +33,13 @@ require_once("C:/xampp\htdocs/finance_saas\includes\check_auth.php");
             </div>
         </div>
         <div class="content">
-            <div class="boxes">
-                <div class="income">Income</div>
-                <div class="expenses">Expenses</div>
-                <div class="cur-balance">Current Balance</div>
+            <div class="main">
+                <div class="m-header">
+                    <div class="trans-history">Transaction History</div>
+                    <div class="m-h-right">
+                        <button>New Transaction</button>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
