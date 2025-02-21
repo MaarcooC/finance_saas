@@ -1,0 +1,156 @@
+.main {
+    width: 90%;
+    background-color: rgb(21, 21, 61);
+    border-radius: 20px;
+    height: fit-content;
+    margin-top: 30px;
+    min-height: 200px;
+    height: fit-content;
+    padding-bottom: 20px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    color: rgb(235, 233, 248);
+}
+
+.m-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    width: 97%;
+}
+
+.trans-history {
+    font-size: 1.5rem;
+    width: fit-content;
+}
+
+.m-h-right {
+    display: flex;
+    align-items: center;
+}
+
+.m-h-right button {
+    background-color: rgb(28, 28, 79);
+    color: rgb(235, 233, 248);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.m-h-right button:hover {
+    background-color: rgb(50, 50, 115);
+    transform: scale(1.05);
+}
+
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: rgb(28, 28, 79);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.transactions-table th, .transactions-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgb(50, 50, 115);
+}
+
+.transactions-table th {
+    background-color: rgb(21, 21, 61);
+    color: rgb(235, 233, 248);
+}
+
+.transactions-table td {
+    color: rgb(235, 233, 248);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    background-color: rgb(28, 28, 79);
+    color: rgb(235, 233, 248);
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin: 0 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: rgb(50, 50, 115);
+}
+
+.pagination span {
+    margin: 0 10px;
+    color: rgb(235, 233, 248);
+}
+
+.trans-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;              
+}
+
+.trans-center form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.trans-center select, 
+.trans-center input[type="date"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #1c1c4f;
+    color: #ebdff8;
+}
+
+.trans-center button {
+    background-color: rgb(28, 28, 79);
+    color: rgb(235, 233, 248);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.trans-center button:hover {
+    background-color: rgb(50, 50, 115);
+    transform: scale(1.05);
+}
+
+.reset-btn {
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: rgb(28, 28, 79);
+    color: white;
+    border-radius: 5px;
+}
+
+.reset-btn:hover {
+    background-color: rgb(50, 50, 115);
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: black;
+    color: inherit;
+}

@@ -1,0 +1,86 @@
+.main {
+    width: 50%;
+    background-color: rgb(21, 21, 61);
+    border-radius: 20px;
+    height: fit-content;
+    margin-top: 30px;
+    height: fit-content;
+    padding-bottom: 20px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    color: rgb(235, 233, 248);
+}
+
+.nt-text {
+    font-size: 30px;
+    text-align: center;
+    padding-top: 10px;
+}
+.cont-form form {
+    margin: 0 auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.cont-form label {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.cont-form input[type="date"],
+.cont-form input[type="text"],
+.cont-form input[type="number"], 
+.cont-form select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgb(35, 35, 94);
+    color: rgb(235, 233, 248);
+    font-size: 16px;
+    width: 100%;
+}
+
+.cont-form input[type="date"]:focus,
+.cont-form input[type="text"]:focus,
+.cont-form select:focus,
+.cont-form input[type="number"]:focus {
+    outline: none;
+    border-color: rgb(30, 144, 255);
+}
+
+.cont-form input[type="submit"] {
+    background-color: rgb(30, 144, 255);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.cont-form input[type="submit"]:hover {
+    background-color: rgb(21, 106, 204);
+}
+
+@media (max-width: 768px) {
+    .main {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .nt-text {
+        font-size: 24px;
+    }
+}
