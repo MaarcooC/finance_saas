@@ -36,7 +36,7 @@ require_once("C:/xampp\htdocs/finance_saas\includes\check_auth.php");
             <div class="main">
                 <div class="nt-text">New Transaction</div>
                 <div class="cont-form">
-                    <form action="">
+                    <form action="in_transaction.php" method="post">
                         <label for="date_t">Date</label>
                         <input type="date" required id="date_t" name="date_t">
 

@@ -108,6 +108,7 @@ $total_pages = ceil($total_records / $records_per_page);
                 <div class="m-header">
                     <div class="trans-history">Transaction History</div>
                     <div class="trans-center">
+                        <div class="cont-form-filter">
                         <form method="GET" action="transactions.php">
                             <!-- Filtro per Data -->
                             <label for="from_date">From:</label>
@@ -151,6 +152,7 @@ $total_pages = ceil($total_records / $records_per_page);
                             <button type="submit">Filter</button>
                             <a href="transactions.php" class="reset-btn">Reset</a>
                         </form>
+                        </div>    
                     </div>
                     <div class="m-h-right">
                         <button><a href="new_transaction.php">New Transaction</a></button>

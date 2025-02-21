@@ -103,13 +103,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;              
+    width: fit-content; 
+    margin-top: 5px;
+}
+
+.cont-form-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
 }
 
 .trans-center form {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;;
+    justify-content: center;
     gap: 10px;
+    margin-bottom: 0px;
+    align-items: center;
+    width: 100%;
 }
 
 .trans-center select, 
