@@ -57,6 +57,7 @@ require_once("C:/xampp\htdocs/finance_saas\includes\check_auth.php");
                             <option value="Gifts">Gifts</option>
                             <option value="Bank">Bank</option>
                             <option value="Space">Space</option>
+                            <option value="Income">Income</option>
                         </select>
 
                         <label for="amount">Amount</label>
