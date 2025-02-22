@@ -79,6 +79,7 @@ $total_pages = ceil($total_records / $records_per_page);
         <title>Dashboard</title>
         <link rel="stylesheet" href="../../assets/css/dashboard/base.css">
         <link rel="stylesheet" href="../../assets/css/dashboard/transaction.css">
+        <link rel="stylesheet" href="../../assets/css/dashboard/filters.css">
         <meta charset="UTF-8">
     </head>
     <body>
@@ -110,14 +111,14 @@ $total_pages = ceil($total_records / $records_per_page);
                     <div class="trans-center">
                         <div class="cont-form-filter">
                         <form method="GET" action="transactions.php">
-                            <!-- Filtro per Data -->
+                            <!-- Date filter -->
                             <label for="from_date">From:</label>
                             <input type="date" name="from_date" value="<?php echo $_GET['from_date'] ?? ''; ?>">
 
                             <label for="to_date">To:</label>
                             <input type="date" name="to_date" value="<?php echo $_GET['to_date'] ?? ''; ?>">
 
-                            <!-- Filtro per Categoria -->
+                            <!-- Category filter -->
                             <select name="category">
                                 <option value="">All Categories</option>
                                 <?php
@@ -133,7 +134,7 @@ $total_pages = ceil($total_records / $records_per_page);
                                 ?>
                             </select>
 
-                            <!-- Filtro per Account -->
+                            <!-- Account filter -->
                             <select name="account">
                                 <option value="">All Accounts</option>
                                 <?php

@@ -1,13 +1,17 @@
 <?php
 require_once("C:/xampp\htdocs/finance_saas\config\config.php");
 require_once("C:/xampp\htdocs/finance_saas\includes\check_auth.php");
+require_once("C:/xampp\htdocs/finance_saas\includes\index_query.php");
+require_once("C:/xampp/htdocs/finance_saas/includes/spline_chart.php");
+$result = Index_query($conn);
 ?>
 
 <html lang="en">
     <head>
         <title>Dashboard</title>
-        <link rel="stylesheet" href="../../assets/css/dashboard/base.css">
         <link rel="stylesheet" href="../../assets/css/dashboard/overview.css">
+        <link rel="stylesheet" href="../../assets/css/dashboard/base.css">
+        <link rel="stylesheet" href="../../assets/css/dashboard/filters.css">
         <meta charset="UTF-8">
     </head>
     <body>
@@ -32,16 +36,112 @@ require_once("C:/xampp\htdocs/finance_saas\includes\check_auth.php");
                 </div>
             </div>
         </div>
-        <div class="content">
+        <div class="index-content">
+            <div class="index-filters-cont">
+                <div class="trans-center">
+                    <div class="cont-form-filter">
+                        <form method="GET" action="index.php">
+                            <!-- Date filter -->
+                            <label for="from_date">From:</label>
+                            <input type="date" name="from_date" id="from_date" value="<?php echo $_GET['from_date'] ?? ''; ?>">
+
+                            <label for="to_date">To:</label>
+                            <input type="date" name="to_date" id="to_date" value="<?php echo $_GET['to_date'] ?? ''; ?>">
+
+                            <!-- Category filter -->
+                            <select name="category">
+                                <option value="">All Categories</option>
+                                <?php
+                                $catQuery = "SELECT DISTINCT category FROM transactions WHERE leg_idUser = ?";
+                                $stmtCat = $conn->prepare($catQuery);
+                                $stmtCat->bind_param("i", $_SESSION['user_id']);
+                                $stmtCat->execute();
+                                $catResult = $stmtCat->get_result();
+                                while ($catRow = $catResult->fetch_assoc()) {
+                                    $selected = ($_GET['category'] ?? '') == $catRow['category'] ? 'selected' : '';
+                                    echo "<option value='{$catRow['category']}' $selected>{$catRow['category']}</option>";
+                                }
+                                ?>
+                            </select>
+
+                            <!-- Account filter -->
+                            <select name="account">
+                                <option value="">All Accounts</option>
+                                <?php
+                                $accQuery = "SELECT DISTINCT account FROM transactions WHERE leg_idUser = ?";
+                                $stmtAcc = $conn->prepare($accQuery);
+                                $stmtAcc->bind_param("i", $_SESSION['user_id']);
+                                $stmtAcc->execute();
+                                $accResult = $stmtAcc->get_result();
+                                while ($accRow = $accResult->fetch_assoc()) {
+                                    $selected = ($_GET['account'] ?? '') == $accRow['account'] ? 'selected' : '';
+                                    echo "<option value='{$accRow['account']}' $selected>{$accRow['account']}</option>";
+                                }
+                                ?>
+                            </select>
+
+                            <button type="submit">Filter</button>
+                            <a href="index.php" class="reset-btn">Reset</a>
+                        </form>
+                    </div>    
+                </div>
+            </div>
             <div class="boxes">
                 <div class="box">
                     <div class="cont-title">
                         <div class="c-title">Income</div>
-                        <div><img src="../../assets/img/trend.png" alt="income-icon"></div>
+                        <div><img src="../../assets/img/in.png" alt="income-icon"></div>
                     </div>
-                    <div class="info">
-                        
+                    <div class="info" id="in">
+                        <?php echo "+ ". income($result) . " €"; ?>
                     </div>
+                </div>
+                <div class="box">
+                    <div class="cont-title">
+                        <div class="c-title">Outcome</div>
+                        <div><img src="../../assets/img/out.png" alt="outcome"></div>
+                    </div>
+                    <div class="info" id="out">
+                        <?php 
+                        $result1 = abs(outcome($result)); 
+                        echo "- ". $result1 . " €";
+                        ?>
+                    </div>
+                </div>
+                <div class="box">
+                    <?php
+                    // calculate income and outcome
+                    $income = income($result);
+                    $outcome = outcome($result);
+
+                    // Calculate the difference
+                    // Add the absolute value of the outcome to avoid confusion with negative signs
+                    $result2 = $income - abs($outcome);  // Add the absolute value of the outcome
+
+                    if ($result2 >= 0) $string = "in";
+                    else $string = "out"
+                    ?>
+
+                    <div class="cont-title">
+                        <div class="c-title">Difference</div>
+                        <div><img src="../../assets/img/<?php echo $string ?>.png" alt="<?php echo $string ?>-icon"></div>
+                    </div>
+                    <div class="info" id="<?php echo $string ?>">
+                        <?php 
+                        // Display the difference with the correct sign
+                        if ($result2 >= 0) {
+                            echo "+ ". number_format($result2, 2) ." €";
+                        } else {
+                            echo "- ". number_format(abs($result2), 2) ." €";
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="cont-graphs">
+            <div class="cont-g">
+                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                    <?php renderChart($result); ?>
                 </div>
             </div>
         </div>

@@ -1,0 +1,70 @@
+.trans-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content; 
+    margin-top: 5px;
+    color: rgb(235, 233, 248);
+}
+
+.cont-form-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
+.trans-center form {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 0px;
+    align-items: center;
+    width: 100%;
+}
+
+.trans-center select, 
+.trans-center input[type="date"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #1c1c4f;
+    color: #ebdff8;
+}
+
+.trans-center button {
+    background-color: rgb(28, 28, 79);
+    color: rgb(235, 233, 248);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.trans-center button:hover {
+    background-color: rgb(50, 50, 115);
+    transform: scale(1.05);
+}
+
+.reset-btn {
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: rgb(28, 28, 79);
+    color: white;
+    border-radius: 5px;
+}
+
+.reset-btn:hover {
+    background-color: rgb(50, 50, 115);
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: black;
+    color: inherit;
+}

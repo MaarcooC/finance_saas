@@ -1,12 +1,17 @@
 .boxes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
     width: 90%;
-    margin: 20px;
+    margin: 20px auto;
 }
 
 .box {
-    width: 25%;
+    width: 20%;
+    min-width: fit-content;
     background-color: rgb(21, 21, 61);
     border-radius: 10px;
+    height: fit-content;
 }
 
 .cont-title {
@@ -14,6 +19,7 @@
     align-items: center;
     justify-content: flex-start;
     margin-left: 10%;
+    padding-top: 5px;
 }
 
 .c-title {
@@ -25,4 +31,52 @@
 .cont-title img {
     padding-top: 5px;
     height: 32px;
+}
+
+.index-filters-cont {
+    background-color: rgb(21, 21, 61);
+    border-radius: 10px;
+    width: 90%;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.index-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cont-form-filter {
+    width: 100%;
+    text-align: center;
+}
+
+.info {
+    font-size: 32 !important;
+    margin-left: 15% !important;
+    margin-top: 10px;
+    padding-bottom: 15px !important;
+    height: 100%;
+}
+
+#in {
+    color: rgb(102, 192, 84) !important;
+}
+
+#out {
+    color: rgb(176, 14, 14);
+}
+
+.cont-graphs {
+    width: 90%;
+}
+
+.cont-g {
+    background-color: rgb(21, 21, 61) !important;
+    width: 45%;
+    padding: 20px;
 }
