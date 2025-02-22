@@ -1,5 +1,6 @@
 <?php
-function renderChart($result, $maxPoints = 20) {
+// Render Column Chart
+function renderChart2($result, $maxPoints = 20) {
     $incomeDataPoints = [];
     $outcomeDataPoints = [];
 
@@ -53,33 +54,15 @@ function renderChart($result, $maxPoints = 20) {
             animationEnabled: true,
             backgroundColor: "rgb(21, 21, 61)",
             title: { text: "Transactions", fontColor: "rgb(235, 233, 248)", fontSize: 20 },
-            axisY: {
-                title: "Amount in Euros", titleFontColor: "rgb(235, 233, 248)", labelFontColor: "rgb(235, 233, 248)",
-                prefix: "€", valueFormatString: "#,##0.##"
-            },
-            axisX: {
-                title: "", titleFontColor: "rgb(235, 233, 248)", labelFontColor: "rgb(235, 233, 248)",
-                lineColor: "rgb(235, 233, 248)", valueFormatString: "DD MMM YYYY", labelAngle: -45,
-                minimum: <?php echo $minDate * 1000; ?>, maximum: <?php echo ($maxDate + $intervalSize) * 1000; ?>
-            },
-            legend: { fontColor: "rgb(235, 233, 248)" },
+            axisY: { title: "Amount in Euros", titleFontColor: "rgb(235, 233, 248)", labelFontColor: "rgb(235, 233, 248)", prefix: "€", valueFormatString: "#,##0.##" },
+            axisX: { title: "", titleFontColor: "rgb(235, 233, 248)", labelFontColor: "rgb(235, 233, 248)", lineColor: "rgb(235, 233, 248)", valueFormatString: "DD MMM YYYY", labelAngle: -45, minimum: <?php echo $minDate * 1000; ?>, maximum: <?php echo ($maxDate + $intervalSize) * 1000; ?> },
+            legend: { cursor: "pointer", fontColor: "rgb(235, 233, 248)", verticalAlign: "center", horizontalAlign: "right", itemclick: function(e) { if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) { e.dataSeries.visible = false; } else { e.dataSeries.visible = true; } chart.render(); } },
             toolTip: { shared: true },
             data: [
-                {
-                    type: "spline", name: "Income", showInLegend: true, markerSize: 5,
-                    lineColor: "rgb(102, 192, 84)", markerColor: "rgb(41, 111, 27)",
-                    xValueFormatString: "DD MMM YYYY", yValueFormatString: "€#,##0.##", xValueType: "dateTime",
-                    dataPoints: <?php echo json_encode($incomeDataPoints, JSON_NUMERIC_CHECK); ?>
-                },
-                {
-                    type: "spline", name: "Outcome", showInLegend: true, markerSize: 5,
-                    lineColor: "rgb(176, 14, 14)", markerColor: "rgb(207, 6, 6)",
-                    xValueFormatString: "DD MMM YYYY", yValueFormatString: "€#,##0.##", xValueType: "dateTime",
-                    dataPoints: <?php echo json_encode($outcomeDataPoints, JSON_NUMERIC_CHECK); ?>
-                }
+                { type: "column", name: "Income", showInLegend: true, color: "rgb(102, 192, 84)", indexLabel: "{y}", yValueFormatString: "€#,##0.##", xValueFormatString: "DD MMM YYYY", xValueType: "dateTime", dataPoints: <?php echo json_encode($incomeDataPoints, JSON_NUMERIC_CHECK); ?> },
+                { type: "column", name: "Outcome", showInLegend: true, color: "rgb(255, 99, 132)", indexLabel: "{y}", yValueFormatString: "€#,##0.##", xValueFormatString: "DD MMM YYYY", xValueType: "dateTime", dataPoints: <?php echo json_encode($outcomeDataPoints, JSON_NUMERIC_CHECK); ?> }
             ]
         });
-
         chart.render();
     }
     </script>

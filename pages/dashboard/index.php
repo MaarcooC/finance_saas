@@ -3,6 +3,8 @@ require_once("C:/xampp\htdocs/finance_saas\config\config.php");
 require_once("C:/xampp\htdocs/finance_saas\includes\check_auth.php");
 require_once("C:/xampp\htdocs/finance_saas\includes\index_query.php");
 require_once("C:/xampp/htdocs/finance_saas/includes/spline_chart.php");
+require_once("C:/xampp/htdocs/finance_saas/includes/multi_series.php");
+require_once("C:/xampp/htdocs/finance_saas/includes/pie.php");
 $result = Index_query($conn);
 ?>
 
@@ -12,6 +14,7 @@ $result = Index_query($conn);
         <link rel="stylesheet" href="../../assets/css/dashboard/overview.css">
         <link rel="stylesheet" href="../../assets/css/dashboard/base.css">
         <link rel="stylesheet" href="../../assets/css/dashboard/filters.css">
+        <script src="../../includes/select_graph.js" defer></script>
         <meta charset="UTF-8">
     </head>
     <body>
@@ -140,10 +143,37 @@ $result = Index_query($conn);
             </div>
             <div class="cont-graphs">
             <div class="cont-g">
-                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-                    <?php renderChart($result); ?>
+                <div class="g-title"></div>
+                <div class="select-g">
+                    <select id="graphs1" name="graphs1" onchange="sendReq()">
+                        <option value="1" <?= (!isset($_SESSION['graph1']) || $_SESSION['graph1'] == 1) ? 'selected' : ''; ?>>Spline Graph</option>
+                        <option value="2" <?= (isset($_SESSION['graph1']) && $_SESSION['graph1'] == 2) ? 'selected' : ''; ?>>Column Graph</option>
+                        <option value="3" <?= (isset($_SESSION['graph1']) && $_SESSION['graph1'] == 3) ? 'selected' : ''; ?>>Pie Graph</option>
+                    </select>
                 </div>
+                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                <?php
+                if (!isset($_SESSION['graph1'])) {
+                    $_SESSION['graph1'] = 1; // default
+                }
+
+                switch ($_SESSION['graph1']) {
+                case 1:
+                    renderChart($result); // Spline chart
+                    break;
+                case 2:
+                    renderChart2($result); // Column chart
+                    break;
+                case 3:
+                    renderPieChart($result); // pie chart
+                default:
+                    echo "<p>No graph selected</p>";
+                    break;
+                }
+                ?>
+
             </div>
+        </div>
         </div>
     </body>
 </html>

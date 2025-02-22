@@ -6,7 +6,7 @@ require_once("C:/xampp\htdocs/finance_saas\includes\check_auth.php");
 function Index_query($conn)
 {
     $user_id = $_SESSION['user_id'];
-    $query = "SELECT amount, t_date FROM transactions WHERE leg_idUser = $user_id";
+    $query = "SELECT amount, t_date, category FROM transactions WHERE leg_idUser = $user_id";
 
     if (isset($_GET['from_date']) && $_GET['from_date'] !== '') {
         $from_date = $_GET['from_date'];

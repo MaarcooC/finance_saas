@@ -72,11 +72,46 @@
 }
 
 .cont-graphs {
-    width: 90%;
+    width: 80%;
 }
 
 .cont-g {
     background-color: rgb(21, 21, 61) !important;
-    width: 45%;
+    width: 100%;
     padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.g-title {
+    font-size: 40px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    display: inline-block;
+}
+
+.select-g {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.select-g select {
+    background-color: rgb(28, 28, 79);
+    color: rgb(235, 233, 248);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.select-g select:hover {
+    background-color: rgb(50, 50, 115);
+    transform: scale(1.05);
+}
+
+#chartContainer {
+    margin-top: 30px;
 }
