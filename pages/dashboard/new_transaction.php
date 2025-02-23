@@ -1,6 +1,6 @@
 <?php
-require_once("C:/xampp\htdocs/finance_saas\config\config.php");
-require_once("C:/xampp\htdocs/finance_saas\includes\check_auth.php");
+require_once("/opt/lampp/htdocs/finance_saas/config/config.php");
+require_once("/opt/lampp/htdocs/finance_saas/includes/check_auth.php");
 ?>
 
 <html lang="en">

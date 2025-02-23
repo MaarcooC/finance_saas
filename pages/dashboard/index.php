@@ -1,10 +1,10 @@
 <?php
-require_once("C:/xampp\htdocs/finance_saas\config\config.php");
-require_once("C:/xampp\htdocs/finance_saas\includes\check_auth.php");
-require_once("C:/xampp\htdocs/finance_saas\includes\index_query.php");
-require_once("C:/xampp/htdocs/finance_saas/includes/spline_chart.php");
-require_once("C:/xampp/htdocs/finance_saas/includes/multi_series.php");
-require_once("C:/xampp/htdocs/finance_saas/includes/pie.php");
+require_once("/opt/lampp/htdocs/finance_saas/config/config.php");
+require_once("/opt/lampp/htdocs/finance_saas/includes/check_auth.php");
+require_once("/opt/lampp/htdocs/finance_saas/includes/index_query.php");
+require_once("/opt/lampp/htdocs/finance_saas/includes/spline_chart.php");
+require_once("/opt/lampp/htdocs/finance_saas/includes/multi_series.php");
+require_once("/opt/lampp/htdocs/finance_saas/includes/pie.php");
 $result = Index_query($conn);
 ?>
 
