@@ -1,6 +1,6 @@
 <?php
-require_once("/opt/lampp/htdocs/finance_saas/config/config.php");
-require_once("/opt/lampp/htdocs/finance_saas/includes/check_auth.php");
+require_once "../../config/config.php";
+require_once "../../includes/check_auth.php";
 
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

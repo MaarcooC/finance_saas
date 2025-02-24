@@ -1,5 +1,5 @@
 <?php
-require_once('/opt/lampp/htdocs/finance_saas/config/config.php');
+require_once "../../config/config.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // sql injection

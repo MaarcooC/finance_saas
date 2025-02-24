@@ -1,5 +1,5 @@
 <?php
-require_once("/opt/lampp/htdocs/finance_saas/config/config.php");
+require_once "../config/config.php";
 
 if (isset($_POST['graphs1'])) {
     $_SESSION['graph1'] = intval($_POST['graphs1']);

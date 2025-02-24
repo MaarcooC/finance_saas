@@ -1,6 +1,6 @@
 <?php
-require_once("/opt/lampp/htdocs/finance_saas/config/config.php");
-require_once("/opt/lampp/htdocs/finance_saas/includes/check_auth.php");
+require_once "../../config/config.php";
+require_once "check_auth.php";
 
 //** Function for the main query */
 function Index_query($conn)
