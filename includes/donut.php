@@ -1,5 +1,5 @@
 <?php
-function renderPieChart($result) {
+function renderDonutChart($result) {
     if (empty($result)) return; // Exit if no data
     
     // Initialize category totals
@@ -38,26 +38,23 @@ function renderPieChart($result) {
 <script>
 window.onload = function () {
     var chart = new CanvasJS.Chart("chartContainer", {
+        backgroundColor: "rgb(21, 21, 61)", // Custom background color
         animationEnabled: true,
-        exportEnabled: true,
-        backgroundColor: "rgb(21, 21, 61)", // From your column chart styling
         title: {
             text: "Outcomes by Category",
             fontColor: "rgb(235, 233, 248)",
             fontSize: 20
         },
-        subtitles: [{
-            text: "Currency: Euro (€)",
-            fontColor: "rgb(235, 233, 248)"
-        }],
         legend: {
             cursor: "pointer",
             fontColor: "rgb(235, 233, 248)",
             verticalAlign: "center",
-            horizontalAlign: "right"
+            horizontalAlign: "right",
+            // Remove percentages from the legend (just category names and amounts)
+            legendText: "{label} : {y}",
         },
         data: [{
-            type: "pie",
+            type: "doughnut",
             showInLegend: true,
             legendText: "{label}",
             indexLabelFontSize: 16,

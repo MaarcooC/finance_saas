@@ -32,6 +32,12 @@ if (isset($_GET['category']) && $_GET['category'] !== '') {
     $query .= " AND category = '$category'";
 }
 
+// filter for descr
+if (isset($_GET['descr']) && $_GET['descr'] !== '') {
+    $category = $_GET['descr'];
+    $query .= " AND descr like '%$category%'";
+}
+
 // filter for account
 if (isset($_GET['account']) && $_GET['account'] !== '') {
     $account = $_GET['account'];
@@ -111,6 +117,9 @@ $total_pages = ceil($total_records / $records_per_page);
                     <div class="trans-center">
                         <div class="cont-form-filter">
                         <form method="GET" action="transactions.php">
+                            <!-- Search Descr -->
+                            <input type="text" class="tptxt" name="descr" value="<?php echo $_GET['descr'] ?? ''; ?>">
+
                             <!-- Date filter -->
                             <label for="from_date">From:</label>
                             <input type="date" name="from_date" value="<?php echo $_GET['from_date'] ?? ''; ?>">

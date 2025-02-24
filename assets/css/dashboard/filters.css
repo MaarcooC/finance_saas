@@ -35,6 +35,14 @@
     color: #ebdff8;
 }
 
+.trans-center input[type="text"] {
+    padding: 5px !important;
+    border-radius: 5px !important;
+    border: 1px solid #ccc !important;
+    background-color: #1c1c4f !important;
+    color: #ebdff8 !important;
+}
+
 .trans-center button {
     background-color: rgb(28, 28, 79);
     color: rgb(235, 233, 248);

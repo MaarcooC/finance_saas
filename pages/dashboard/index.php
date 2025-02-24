@@ -5,6 +5,7 @@ require_once("/opt/lampp/htdocs/finance_saas/includes/index_query.php");
 require_once("/opt/lampp/htdocs/finance_saas/includes/spline_chart.php");
 require_once("/opt/lampp/htdocs/finance_saas/includes/multi_series.php");
 require_once("/opt/lampp/htdocs/finance_saas/includes/pie.php");
+require_once("/opt/lampp/htdocs/finance_saas/includes/donut.php");
 $result = Index_query($conn);
 ?>
 
@@ -149,6 +150,7 @@ $result = Index_query($conn);
                         <option value="1" <?= (!isset($_SESSION['graph1']) || $_SESSION['graph1'] == 1) ? 'selected' : ''; ?>>Spline Graph</option>
                         <option value="2" <?= (isset($_SESSION['graph1']) && $_SESSION['graph1'] == 2) ? 'selected' : ''; ?>>Column Graph</option>
                         <option value="3" <?= (isset($_SESSION['graph1']) && $_SESSION['graph1'] == 3) ? 'selected' : ''; ?>>Pie Graph</option>
+                        <option value="4" <?= (isset($_SESSION['graph1']) && $_SESSION['graph1'] == 4) ? 'selected' : ''; ?>>Donut Graph</option>
                     </select>
                 </div>
                 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
@@ -166,6 +168,11 @@ $result = Index_query($conn);
                     break;
                 case 3:
                     renderPieChart($result); // pie chart
+                    break;
+                case 4:
+                    renderDonutChart($result); // drilldown
+                    break;
+                
                 default:
                     echo "<p>No graph selected</p>";
                     break;
