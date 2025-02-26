@@ -24,7 +24,7 @@ require_once "../../includes/check_auth.php";
             <div class="center">
                 <button><a href="index.php">Overview</a></button>
                 <button><a href="transactions.php">Transactions</a></button>
-                <button>Settings</button>
+                <button><a href="settings.php">Settings</a></button>
             </div>
             <div class="right">
                 <div class="logout">

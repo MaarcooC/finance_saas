@@ -102,7 +102,7 @@ $total_pages = ceil($total_records / $records_per_page);
             <div class="center">
                 <button><a href="index.php">Overview</a></button>
                 <button><a href="transactions.php">Transactions</a></button>
-                <button>Settings</button>
+                <button><a href="settings.php">Settings</a></button>
             </div>
             <div class="right">
                 <div class="logout">
