@@ -47,10 +47,10 @@ $result = Index_query($conn);
                         <form method="GET" action="index.php">
                             <!-- Date filter -->
                             <label for="from_date">From:</label>
-                            <input type="date" name="from_date" id="from_date" value="<?php echo $_GET['from_date'] ?? ''; ?>">
+                            <input type="date" name="from_date" id="from_date" value="<?php echo $_GET['from_date'] ?? getFirstJanuary(); ?>">
 
                             <label for="to_date">To:</label>
-                            <input type="date" name="to_date" id="to_date" value="<?php echo $_GET['to_date'] ?? ''; ?>">
+                            <input type="date" name="to_date" id="to_date" value="<?php echo $_GET['to_date'] ?? getLastDec(); ?>">
 
                             <!-- Category filter -->
                             <select name="category">

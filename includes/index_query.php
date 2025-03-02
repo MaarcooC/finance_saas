@@ -59,3 +59,15 @@ function outcome($data)
 
     return round($sum, 2);
 }
+
+//** function that prints the first of jenuary of the current year (date filters defaul) */
+function getFirstJanuary() : void
+{
+    echo date('Y-01-01');
+}
+
+//** function that prints the last day of december of the current year (date filters defaul) */
+function getLastDec() : void
+{
+    echo date('Y-12-31');
+}
