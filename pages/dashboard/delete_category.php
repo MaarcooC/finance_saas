@@ -2,13 +2,13 @@
 require_once "../../config/config.php";
 require_once "../../includes/check_auth.php";
 
-if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $id = (int)$_GET['id'];
+if (isset($_GET['idCat'])) {
+    $cat = $_GET['idCat'];
 
     // delete category query
-    $query = "DELETE FROM categories WHERE idcat = ?";
+    $query = "DELETE FROM categories WHERE idCat = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $id);
+    $stmt->bind_param("i", $cat);
 
     if ($stmt->execute()) {
         header("Location: settings.php?success=1");

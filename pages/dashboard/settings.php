@@ -51,6 +51,13 @@ require_once "../../includes/show_cat.php";
                         <tr><th>Categories</th><th>Action</th></tr>
                         <?php show($conn); ?>
                     </table>
+                    <div>
+                        <form action="new_cat.php" method="post">
+                            <label for="cat">Insert new Category</label>
+                            <input id="cat" type="text" name="category">
+                            <input type="submit" value="Insert">
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="altro-content" id="c-content">

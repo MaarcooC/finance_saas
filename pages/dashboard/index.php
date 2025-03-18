@@ -56,7 +56,7 @@ $result = Index_query($conn);
                             <select name="category">
                                 <option value="">All Categories</option>
                                 <?php
-                                $catQuery = "SELECT DISTINCT category FROM transactions WHERE leg_idUser = ?";
+                                $catQuery = "SELECT category FROM categories WHERE leguser_id = ?";
                                 $stmtCat = $conn->prepare($catQuery);
                                 $stmtCat->bind_param("i", $_SESSION['user_id']);
                                 $stmtCat->execute();
