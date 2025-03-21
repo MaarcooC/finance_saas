@@ -41,7 +41,7 @@ require_once "../../includes/show_cat.php";
                     Manage categories
                 </div>
                 <div class="cat" onclick="showContent('altro-content')">
-                    Altro
+                    Others
                 </div>
             </div>
             <div class="man-cat-content" id="c-content">

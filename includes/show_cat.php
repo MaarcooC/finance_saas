@@ -3,7 +3,11 @@ require_once "../../config/config.php";
 
 // function that shows the table with all categories
 function show ($conn)  {
-    $query = "select idCat, category from categories";
+
+    // Get the logged-in user's ID
+    $user_id = $_SESSION['user_id'];
+    
+    $query = "select idCat, category from categories where leguser_id = $user_id";
 
     // execute the query to get the records
     $result = $conn->query($query);
