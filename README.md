@@ -19,7 +19,7 @@ There is also a registration page, but I only used it once. Every internal page 
 
 ### Dashboard page
 
-![dashboard.png](imaegs/dashboard.png)
+![dashboard.png](images/dashboard.png)
 
 The dashboard is the main page, acting as a statistics and summary section. It features four types of graphs (spline, column, pie, and donut) to display transactions and categories in different ways.
 
