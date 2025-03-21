@@ -2,79 +2,93 @@
 require_once "../../config/config.php";
 require_once "../../includes/check_auth.php";
 
-// records per page
+// Records per page
 $records_per_page = 15;
 
-// determine the current page
+// Determine the current page
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $records_per_page;
 
-// get the logged user's id
+// Get the logged-in user's ID
 $user_id = $_SESSION['user_id'];
 
-// start building the SQL query
-$query = "SELECT * FROM transactions WHERE leg_idUser = $user_id";
+// Sanitize input parameters
+$from_date = isset($_GET['from_date']) ? $conn->real_escape_string($_GET['from_date']) : '';
+$to_date = isset($_GET['to_date']) ? $conn->real_escape_string($_GET['to_date']) : '';
+$category = isset($_GET['category']) ? (int)$_GET['category'] : 0;
+$descr = isset($_GET['descr']) ? $conn->real_escape_string($_GET['descr']) : '';
+$account = isset($_GET['account']) ? $conn->real_escape_string($_GET['account']) : '';
 
-// filters for date
-if (isset($_GET['from_date']) && $_GET['from_date'] !== '') {
-    $from_date = $_GET['from_date'];
-    $query .= " AND t_date >= '$from_date'";
+// Construct the SQL query
+$query = "SELECT 
+            t.idTrans, 
+            t.t_date, 
+            t.descr, 
+            t.amount, 
+            t.account, 
+            c.category 
+          FROM transactions t
+          LEFT JOIN categories c ON t.leg_cat = c.idCat 
+          WHERE t.leg_idUser = $user_id";
+
+// Apply filters if provided
+if (!empty($from_date)) {
+    $query .= " AND t.t_date >= '$from_date'";
 }
 
-if (isset($_GET['to_date']) && $_GET['to_date'] !== '') {
-    $to_date = $_GET['to_date'];
-    $query .= " AND t_date <= '$to_date'";
+if (!empty($to_date)) {
+    $query .= " AND t.t_date <= '$to_date'";
 }
 
-// filter for category
-if (isset($_GET['category']) && $_GET['category'] !== '') {
-    $category = $_GET['category'];
-    $query .= " AND category = '$category'";
+if ($category > 0) {
+    $query .= " AND t.leg_cat = $category";
 }
 
-// filter for descr
-if (isset($_GET['descr']) && $_GET['descr'] !== '') {
-    $category = $_GET['descr'];
-    $query .= " AND descr like '%$category%'";
+if (!empty($descr)) {
+    $query .= " AND t.descr LIKE '%$descr%'";
 }
 
-// filter for account
-if (isset($_GET['account']) && $_GET['account'] !== '') {
-    $account = $_GET['account'];
-    $query .= " AND account = '$account'";
+if (!empty($account)) {
+    $query .= " AND t.account = '$account'";
 }
 
-// add ordering and pagination
-$query .= " ORDER BY t_date DESC LIMIT $records_per_page OFFSET $offset";
+// Add ordering and pagination
+$query .= " ORDER BY t.t_date DESC LIMIT $records_per_page OFFSET $offset";
 
-// execute the query to get the records
+// Execute the query
 $result = $conn->query($query);
 
-// total number of records (with any applied filters)
-$total_query = "SELECT COUNT(*) as total FROM transactions WHERE leg_idUser = $user_id";
+// Query to get the total number of records (for pagination)
+$total_query = "SELECT COUNT(*) as total FROM transactions t
+                LEFT JOIN categories c ON t.leg_cat = c.idCat 
+                WHERE t.leg_idUser = $user_id";
 
-// apply filters to the total query
-if (isset($from_date) && $from_date !== '') {
-    $total_query .= " AND t_date >= '$from_date'";
+// Apply filters to the total count query
+if (!empty($from_date)) {
+    $total_query .= " AND t.t_date >= '$from_date'";
 }
 
-if (isset($to_date) && $to_date !== '') {
-    $total_query .= " AND t_date <= '$to_date'";
+if (!empty($to_date)) {
+    $total_query .= " AND t.t_date <= '$to_date'";
 }
 
-if (isset($category) && $category !== '') {
-    $total_query .= " AND category = '$category'";
+if ($category > 0) {
+    $total_query .= " AND t.leg_cat = $category";
 }
 
-if (isset($account) && $account !== '') {
-    $total_query .= " AND account = '$account'";
+if (!empty($descr)) {
+    $total_query .= " AND t.descr LIKE '%$descr%'";
+}
+
+if (!empty($account)) {
+    $total_query .= " AND t.account = '$account'";
 }
 
 $total_result = $conn->query($total_query);
 $total_row = $total_result->fetch_assoc();
 $total_records = $total_row['total'];
 
-// calculate the total number of pages
+// Calculate the total number of pages
 $total_pages = ceil($total_records / $records_per_page);
 ?>
 
@@ -131,14 +145,14 @@ $total_pages = ceil($total_records / $records_per_page);
                             <select name="category">
                                 <option value="">All Categories</option>
                                 <?php
-                                $catQuery = "SELECT DISTINCT category FROM categories WHERE leguser_id = ?";
+                                $catQuery = "SELECT DISTINCT idCat, category FROM categories WHERE leguser_id = ?";
                                 $stmtCat = $conn->prepare($catQuery);
                                 $stmtCat->bind_param("i", $_SESSION['user_id']);
                                 $stmtCat->execute();
                                 $catResult = $stmtCat->get_result();
                                 while ($catRow = $catResult->fetch_assoc()) {
                                     $selected = ($_GET['category'] ?? '') == $catRow['category'] ? 'selected' : '';
-                                    echo "<option value='{$catRow['category']}' $selected>{$catRow['category']}</option>";
+                                    echo "<option value='{$catRow['idCat']}' $selected>{$catRow['category']}</option>";
                                 }
                                 ?>
                             </select>

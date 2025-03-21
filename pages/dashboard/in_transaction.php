@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $account = $conn->real_escape_string($account);
 
     // Prepare the SQL query to insert the data
-    $query = "INSERT INTO transactions (leg_idUser, t_date, descr, category, amount, account)
+    $query = "INSERT INTO transactions (leg_idUser, t_date, descr, leg_cat, amount, account)
               VALUES ('$user_id', '$date', '$description', '$category', '$amount', '$account')";
 
     // Execute the query

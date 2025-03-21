@@ -1,6 +1,21 @@
 <?php
 require_once "../../config/config.php";
 require_once "../../includes/check_auth.php";
+
+// get the logged user's id
+$user_id = $_SESSION['user_id'];
+
+$query = "select idCat, category from categories where leguser_id = $user_id";
+
+// show select input
+function select_personal($conn, $ris, $res):void
+{
+    while ($row = mysqli_fetch_assoc($ris)) {
+        echo '<option value="'.$row["$res"].'">';
+        echo htmlspecialchars($row['category']);
+        echo '</option>';
+    }
+}
 ?>
 
 <html lang="en">
@@ -45,19 +60,17 @@ require_once "../../includes/check_auth.php";
                         
                         <label for="category">Category</label>
                         <select name="category" id="category">
-                            <option value="health">Health</option>
-                            <option value="Food">Food</option>
-                            <option value="Clothes">Clothes</option>
-                            <option value="School">School</option>
-                            <option value="Travels">Travels</option>
-                            <option value="Motorsport">Motorsport</option>
-                            <option value="Leisure">Leisure</option>
-                            <option value="My car">My car</option>
-                            <option value="Subscriptions">Subscriptions</option>
-                            <option value="Gifts">Gifts</option>
-                            <option value="Bank">Bank</option>
-                            <option value="Space">Space</option>
-                            <option value="Income">Income</option>
+                            <?php 
+                            // get the logged user's id
+                            $user_id = $_SESSION['user_id'];
+
+                            $query = "select idCat, category from categories where leguser_id = $user_id";
+
+                            // execute the query to get the records
+                            $result = $conn->query($query);
+
+                            select_personal($conn, $result, "idCat");
+                            ?>
                         </select>
 
                         <label for="amount">Amount</label>
