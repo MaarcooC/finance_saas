@@ -31,7 +31,7 @@ Above the graphs, three summary boxes display total income, total expenses, and 
 
 ![transactions.png](images/transactions.png)
 
-This page presents transactions in a table format, with the same filtering options as the dashboard page. Each transaction can be deleted using a trash bin button on the right side of the record.
+This page presents transactions in a table format, with the same filtering options as the dashboard page and a search bar. Each transaction can be deleted using a trash bin button on the right side of the record.
 
 In the top-right corner, there is also a button to open the form for adding a new transaction.
 
