@@ -3,7 +3,7 @@
 
 My finance manager is built using HTML, CSS, JavaScript, PHP, and SQL (MariaDB), which I am currently studying at school. I used to manage my finances with a Google Spreadsheet, but I didn’t like it, so I created my own web application.
 
-The application is fully functional with its main features, but I plan to add more (see the to-do page).
+The application is fully functional with its main features, but I plan to add more.
 
 This project is made for personal use. While I have implemented some security precautions, I cannot guarantee complete safety.
 
