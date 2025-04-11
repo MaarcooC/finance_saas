@@ -23,7 +23,7 @@ There is also a registration page, but I only used it once. Every internal page 
 
 The dashboard is the main page, acting as a statistics and summary section. It features four types of graphs (spline, column, pie, and donut) to display transactions and categories in different ways.
 
-The page includes filters for the displayed data, allowing users to filter by date (defaulting to the current year), category, and account.
+The page includes filters for the displayed data, allowing users to filter by date (defaulting to the current year), category, group, and account.
 
 Above the graphs, three summary boxes display total income, total expenses, and the difference between them.
 
