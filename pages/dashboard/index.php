@@ -68,6 +68,22 @@ $result = Index_query($conn);
                                 ?>
                             </select>
 
+                            <!-- Groups filter -->
+                            <select name="groups">
+                                <option value="">All Groups</option>
+                                <?php
+                                $groupQuery = "SELECT DISTINCT groups FROM transactions WHERE leg_idUser = ? and groups is not null";
+                                $stmtGroup = $conn->prepare($groupQuery);
+                                $stmtGroup->bind_param("i", $_SESSION['user_id']);
+                                $stmtGroup->execute();
+                                $groupResult = $stmtGroup->get_result();
+                                while ($groupRow = $groupResult->fetch_assoc()) {
+                                    $selected = ($_GET['groups'] ?? '') == $groupRow['groups'] ? 'selected' : '';
+                                    echo "<option value='{$groupRow['groups']}' $selected>{$groupRow['groups']}</option>";
+                                }
+                                ?>
+                            </select>
+
                             <!-- Account filter -->
                             <select name="account">
                                 <option value="">All Accounts</option>

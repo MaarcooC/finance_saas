@@ -6,7 +6,7 @@ require_once "check_auth.php";
 function Index_query($conn)
 {
     $user_id = $_SESSION['user_id'];
-    $query = "SELECT amount, t_date, category FROM transactions, categories WHERE leg_cat = idCat and leg_idUser = $user_id";
+    $query = "SELECT amount, t_date, category, groups FROM transactions, categories WHERE leg_cat = idCat and leg_idUser = $user_id";
 
     if (isset($_GET['from_date']) && $_GET['from_date'] !== '') {
         $from_date = $_GET['from_date'];
@@ -21,6 +21,11 @@ function Index_query($conn)
     if (isset($_GET['category']) && $_GET['category'] !== '') {
         $category = $_GET['category'];
         $query .= " AND category = '$category'";
+    }
+
+    if (isset($_GET['groups']) && $_GET['groups'] !== '') {
+        $groups = $_GET['groups'];
+        $query .= " AND groups = '$groups'";
     }
 
     if (isset($_GET['account']) && $_GET['account'] !== '') {
