@@ -16,6 +16,7 @@ $user_id = $_SESSION['user_id'];
 $from_date = isset($_GET['from_date']) ? $conn->real_escape_string($_GET['from_date']) : '';
 $to_date = isset($_GET['to_date']) ? $conn->real_escape_string($_GET['to_date']) : '';
 $category = isset($_GET['category']) ? (int)$_GET['category'] : 0;
+$groups = isset($_GET['groups']) ? $conn->real_escape_string($_GET['groups']) : '';
 $descr = isset($_GET['descr']) ? $conn->real_escape_string($_GET['descr']) : '';
 $account = isset($_GET['account']) ? $conn->real_escape_string($_GET['account']) : '';
 
@@ -25,7 +26,8 @@ $query = "SELECT
             t.t_date, 
             t.descr, 
             t.amount, 
-            t.account, 
+            t.account,
+            t.groups, 
             c.category 
           FROM transactions t
           LEFT JOIN categories c ON t.leg_cat = c.idCat 
@@ -50,6 +52,10 @@ if (!empty($descr)) {
 
 if (!empty($account)) {
     $query .= " AND t.account = '$account'";
+}
+
+if ($groups !== '') {
+    $query .= " AND (t.groups = '$groups' OR (t.groups IS NULL AND '$groups' = 'NULL'))";
 }
 
 // Add ordering and pagination
@@ -84,6 +90,10 @@ if (!empty($account)) {
     $total_query .= " AND t.account = '$account'";
 }
 
+if ($groups !== '') {
+    $query .= " AND (t.groups = '$groups' OR (t.groups IS NULL AND '$groups' = 'NULL'))";
+}
+
 $total_result = $conn->query($total_query);
 $total_row = $total_result->fetch_assoc();
 $total_records = $total_row['total'];
@@ -91,8 +101,6 @@ $total_records = $total_row['total'];
 // Calculate the total number of pages
 $total_pages = ceil($total_records / $records_per_page);
 ?>
-
-
 
 <html lang="en">
     <head>
@@ -157,6 +165,22 @@ $total_pages = ceil($total_records / $records_per_page);
                                 ?>
                             </select>
 
+                            <!-- Groups filter -->
+                            <select name="groups">
+                                <option value="">All Groups</option>
+                                <?php
+                                $groupQuery = "SELECT DISTINCT groups FROM transactions WHERE leg_idUser = ? and groups is not null";
+                                $stmtGroup = $conn->prepare($groupQuery);
+                                $stmtGroup->bind_param("i", $_SESSION['user_id']);
+                                $stmtGroup->execute();
+                                $groupResult = $stmtGroup->get_result();
+                                while ($groupRow = $groupResult->fetch_assoc()) {
+                                    $selected = ($_GET['groups'] ?? '') == $groupRow['groups'] ? 'selected' : '';
+                                    echo "<option value='{$groupRow['groups']}' $selected>{$groupRow['groups']}</option>";
+                                }
+                                ?>
+                            </select>
+
                             <!-- Account filter -->
                             <select name="account">
                                 <option value="">All Accounts</option>
@@ -190,6 +214,7 @@ $total_pages = ceil($total_records / $records_per_page);
                             <th>Date</th>
                             <th>Description</th>
                             <th>Category</th>
+                            <th>Group</th>
                             <th>Amount</th>
                             <th>Account</th>
                             <th>Actions</th>
@@ -201,6 +226,7 @@ $total_pages = ceil($total_records / $records_per_page);
                                 <td><?php echo date("d/m/Y", strtotime($row['t_date'])); ?></td>
                                 <td><?php echo htmlspecialchars($row['descr']); ?></td>
                                 <td><?php echo htmlspecialchars($row['category']); ?></td>
+                                <td><?php echo htmlspecialchars($row['groups']); ?></td>
                                 <td><?php echo number_format($row['amount'], 2); ?> €</td>
                                 <td><?php echo htmlspecialchars($row['account']); ?></td>
                                 <td>

@@ -73,6 +73,9 @@ function select_personal($conn, $ris, $res):void
                             ?>
                         </select>
 
+                        <label for="groups">Group</label>
+                        <input type="text" name="groups" id="groups">
+
                         <label for="amount">Amount</label>
                         <input type="number" step="0.01" required id="amount" name="amount">
                         
