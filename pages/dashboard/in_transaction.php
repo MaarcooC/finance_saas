@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $date = $_POST['date_t'];
     $description = $_POST['descr'];
     $category = $_POST['category'];
-    $groups = $_POST['groups'];
     $amount = $_POST['amount'];
     $account = $_POST['account'];
     $user_id = $_SESSION['user_id'];
@@ -22,9 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $account = $conn->real_escape_string($account);
 
     // Prepare the SQL query to insert the data
-    $query = "INSERT INTO transactions (leg_idUser, t_date, descr, leg_cat, groups, amount, account)
-              VALUES ('$user_id', '$date', '$description', '$category', '$groups', '$amount', '$account')";
-
+    // if group's been inserted
+    if (isset($_POST['groups'])) {
+        $groups = $conn->real_escape_string($_POST['groups']);
+        $query = "INSERT INTO transactions (leg_idUser, t_date, descr, leg_cat, amount, account, groups)
+                  VALUES ('$user_id', '$date', '$description', '$category', '$amount', '$account', '$groups')";
+    } else {
+        $query = "INSERT INTO transactions (leg_idUser, t_date, descr, leg_cat, amount, account)
+                  VALUES ('$user_id', '$date', '$description', '$category', '$amount', '$account')";
+    }
+    
+    
     // Execute the query
     if ($conn->query($query) === true) {
         echo "<script>alert('Transaction added successfully!'); window.location.href='transactions.php';</script>";

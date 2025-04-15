@@ -1,7 +1,7 @@
 <?php
 require_once "../../config/config.php";
 require_once "../../includes/check_auth.php";
-require_once "../../includes/show_cat.php";
+require_once "../../includes/show_settings.php";
 ?>
 
 <html lang="en">
@@ -37,31 +37,47 @@ require_once "../../includes/show_cat.php";
         </div>
         <div class="settings-content">
             <div class="sidebar">
-                <div class="cat" onclick="showContent('man-cat-content')">
-                    Manage categories
-                </div>
-                <div class="cat" onclick="showContent('altro-content')">
-                    Others
-                </div>
+                <div class="cat" onclick="showContent('man-cat-content')">Manage categories</div>
+                <div class="cat" onclick="showContent('man-group-content')">Manage groups</div>
+                <div class="cat" onclick="showContent('altro-content')">Others</div>
             </div>
-            <div class="man-cat-content" id="c-content">
+            <div class="man-cat-content" id="man-cat-content">
                 <div class="cont-cat">
                     <div class="c-title">Manage Categories</div>
                     <table>
                         <tr><th>Categories</th><th>Action</th></tr>
-                        <?php show($conn); ?>
+                        <?php show_cat($conn); ?>
                     </table>
                     <div>
                         <form action="new_cat.php" method="post">
                             <label for="cat">Insert new Category</label>
-                            <input id="cat" type="text" name="category">
+                            <input id="cat" type="text" name="category" required>
                             <input type="submit" value="Insert">
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="altro-content" id="c-content">
-                ciao2
+            <div class="man-group-content" id="man-group-content">
+                <div class="cont-cat">
+                    <div class="c-title">Manage Groups</div>
+                    <table>
+                        <tr><th>Groups</th><th>Action</th></tr>
+                        <?php show_group($conn); ?>
+                    </table>
+                    <div>
+                        <form action="new_group.php" method="post">
+                            <label for="group">Insert new Group</label>
+                            <input id="group" type="text" name="group" required>
+                            <input type="submit" value="Insert">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="altro-content" id="altro-content">
+                <div class="cont-cat">
+                    <div class="c-title">Others</div>
+                    <p>ciao2</p>
+                </div>
             </div>
         </div>
     </body>

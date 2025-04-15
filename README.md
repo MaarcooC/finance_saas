@@ -65,6 +65,16 @@ CREATE TABLE categories (
 );
 ```
 
+#### Groups Table
+```sql
+CREATE TABLE groups (
+    idGroup INT(5) PRIMARY KEY AUTO_INCREMENT,
+    groupname VARCHAR(100) NOT NULL,
+    leg_iduser INT(5) not null,
+    FOREIGN KEY (leg_idUser) REFERENCES users(idUser) ON DELETE CASCADE ON UPDATE CASCADE
+);
+```
+
 #### Transactions Table
 ```sql
 CREATE TABLE transactions (
@@ -73,11 +83,12 @@ CREATE TABLE transactions (
     descr VARCHAR(20) NOT NULL,
     amount DECIMAL(10,2) NOT NULL,
     leg_idUser INT(5) NOT NULL,
-    groups VARCHAR(100),
     FOREIGN KEY (leg_idUser) REFERENCES users(idUser) ON DELETE CASCADE ON UPDATE CASCADE,
     account VARCHAR(20) NOT NULL,
     leg_cat INT(3) NOT NULL,
-    FOREIGN KEY (leg_cat) REFERENCES categories (idCat) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (leg_cat) REFERENCES categories (idCat) ON DELETE SET NULL ON UPDATE SET NULL,
+    leg_idgroup INT(5),
+    FOREIGN KEY (leg_idgroup) REFERENCES groups (idgroup)ON DELETE SET NULL ON UPDATE SET NULL
 );
 ```
 
