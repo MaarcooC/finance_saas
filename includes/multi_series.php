@@ -59,8 +59,8 @@ function renderChart2($result, $maxPoints = 20) {
             legend: { cursor: "pointer", fontColor: "rgb(235, 233, 248)", verticalAlign: "center", horizontalAlign: "right", itemclick: function(e) { if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) { e.dataSeries.visible = false; } else { e.dataSeries.visible = true; } chart.render(); } },
             toolTip: { shared: true },
             data: [
-                { type: "column", name: "Income", showInLegend: true, color: "rgb(102, 192, 84)", indexLabel: "{y}", yValueFormatString: "€#,##0.##", xValueFormatString: "DD MMM YYYY", xValueType: "dateTime", dataPoints: <?php echo json_encode($incomeDataPoints, JSON_NUMERIC_CHECK); ?> },
-                { type: "column", name: "Outcome", showInLegend: true, color: "rgb(255, 99, 132)", indexLabel: "{y}", yValueFormatString: "€#,##0.##", xValueFormatString: "DD MMM YYYY", xValueType: "dateTime", dataPoints: <?php echo json_encode($outcomeDataPoints, JSON_NUMERIC_CHECK); ?> }
+                { type: "column", name: "Income", indexLabelFontColor: "rgb(235, 233, 248)", showInLegend: true, color: "rgb(102, 192, 84)", indexLabel: "{y}", yValueFormatString: "€#,##0.##", xValueFormatString: "DD MMM YYYY", xValueType: "dateTime", dataPoints: <?php echo json_encode($incomeDataPoints, JSON_NUMERIC_CHECK); ?> },
+                { type: "column", name: "Outcome", indexLabelFontColor: "rgb(235, 233, 248)", showInLegend: true, color: "rgb(255, 99, 132)", indexLabel: "{y}", yValueFormatString: "€#,##0.##", xValueFormatString: "DD MMM YYYY", xValueType: "dateTime", dataPoints: <?php echo json_encode($outcomeDataPoints, JSON_NUMERIC_CHECK); ?> }
             ]
         });
         chart.render();
