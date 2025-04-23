@@ -8,11 +8,11 @@ $user_id = $_SESSION['user_id'];
 $query = "select idCat, category from categories where leguser_id = $user_id";
 
 // show select input
-function select_personal($conn, $ris, $res):void
+function select_personal($conn, $ris, $res, $name):void
 {
     while ($row = mysqli_fetch_assoc($ris)) {
         echo '<option value="'.$row["$res"].'">';
-        echo htmlspecialchars($row['category']);
+        echo htmlspecialchars($row[$name]);
         echo '</option>';
     }
 }
@@ -69,12 +69,24 @@ function select_personal($conn, $ris, $res):void
                             // execute the query to get the records
                             $result = $conn->query($query);
 
-                            select_personal($conn, $result, "idCat");
+                            select_personal($conn, $result, "idCat", 'category');
                             ?>
                         </select>
 
                         <label for="groups">Group</label>
-                        <input type="text" name="groups" id="groups">
+                        <select name="groups" id="groups">
+                            <?php 
+                            // get the logged user's id
+                            $user_id = $_SESSION['user_id'];
+
+                            $query = "select idGroup, groupName from groups where leg_iduser = $user_id";
+
+                            // execute the query to get the records
+                            $result = $conn->query($query);
+
+                            select_personal($conn, $result, "idGroup", 'groupName');
+                            ?>
+                        </select>
 
                         <label for="amount">Amount</label>
                         <input type="number" step="0.01" required id="amount" name="amount">

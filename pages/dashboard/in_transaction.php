@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $date = $conn->real_escape_string($date);
     $description = $conn->real_escape_string($description);
     $category = $conn->real_escape_string($category);
-    $groups = $conn->real_escape_string($groups);
     $amount = $conn->real_escape_string($amount);
     $account = $conn->real_escape_string($account);
 
@@ -24,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // if group's been inserted
     if (isset($_POST['groups'])) {
         $groups = $conn->real_escape_string($_POST['groups']);
-        $query = "INSERT INTO transactions (leg_idUser, t_date, descr, leg_cat, amount, account, groups)
+        $query = "INSERT INTO transactions (leg_idUser, t_date, descr, leg_cat, amount, account, leg_idgroup)
                   VALUES ('$user_id', '$date', '$description', '$category', '$amount', '$account', '$groups')";
     } else {
         $query = "INSERT INTO transactions (leg_idUser, t_date, descr, leg_cat, amount, account)
